@@ -22,7 +22,7 @@ $ go get github.com/mattn/mackerel-agent
 
 # License
 
-MIT
+MIT, But I'll relinquish license after merging codes into official product.
 
 # Author
 
