@@ -1,6 +1,6 @@
 # mackerel-agent
 
-** Note: This will be obsoleted after merging codes into official product.
+**Note: This will be obsoleted after merging codes into official product.**
 
 Agent for [mackerel.io](http://mackerel.io)
 
