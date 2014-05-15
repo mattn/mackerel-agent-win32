@@ -507,19 +507,20 @@ func (c *client) postMetricInfo() error {
 		return err
 	}
 
-	infos = append(infos, map[string]interface{}{
-		"hostId": c.hostId,
-		"name":   "memory.total",
-		"time":   time.Now().Unix(),
-		"value":  memoryStatusEx.TotalPhys / 1024,
-	})
-
-	infos = append(infos, map[string]interface{}{
-		"hostId": c.hostId,
-		"name":   "memory.free",
-		"time":   time.Now().Unix(),
-		"value":  memoryStatusEx.AvailPhys / 1024,
-	})
+    infos = append(infos, []map[string]interface{}{
+            {
+                    "hostId": c.hostId,
+                    "name":   "memory.total",
+                    "time":   time.Now().Unix(),
+                    "value":  memoryStatusEx.TotalPhys/1024,
+            },
+            {
+                    "hostId": c.hostId,
+                    "name":   "memory.free",
+                    "time":   time.Now().Unix(),
+                    "value":  memoryStatusEx.AvailPhys/1024,
+            },
+    }...)
 
 	var buf bytes.Buffer
 	err = json.NewEncoder(&buf).Encode(infos)
@@ -557,6 +558,10 @@ var verbose = flag.Bool("v", false, "Toggle verbosity")
 
 func main() {
 	flag.Parse()
+	if *apikey == "" {
+		flag.Usage()
+		os.Exit(0)
+	}
 
 	hostId := ""
 	b, err := ioutil.ReadFile("id")
